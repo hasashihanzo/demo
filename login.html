@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+    <title>Facebook Login</title>
+    <style>
+      /* CSS styles */
+      * {
+        font-family: sans-serif;
+      }
+
+      body {
+        background-color: #f0f2f5;
+      }
+
+      .login-fb {
+        width: 80%;
+        margin-left: 10%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+      }
+
+      .login-fb .info {
+        margin-top: 65px;
+        margin-left: 34px;
+      }
+
+      .login-fb .info .image {
+        width: 244px;
+        margin-bottom: -14px;
+        margin-left: -27px;
+        padding: 20px;
+      }
+
+      .login-fb .info .image img {
+        width: 88%;
+      }
+
+      .login-fb .info h2 {
+        color: black;
+        font-weight: 100;
+        margin: 8px 0 -12px;
+        font-size: 28px;
+      }
+
+      .login-fb .info p {
+        font-size: 15px;
+        margin-top: 21px;
+      }
+
+      .login-fb .contes {
+        display: flex;
+        margin-top: 30px;
+      }
+
+      .login-fb .info .contes .image-profile {
+        width: 161px;
+        height: 194px;
+        position: relative;
+        border: 1px solid #9e9e9e3b;
+        border-radius: 10px;
+      }
+
+      .login-fb .info .contes .image-profile:hover,
+      .login-fb .info .contes .image-creer:hover {
+        box-shadow: 0px 0px 8px #ccc;
+        transform: scale(1.04);
+        cursor: pointer;
+      }
+
+      .login-fb .info .contes .image-profile::after {
+        content: "Trần Gia Thịnh";
+        position: absolute;
+        background-color: white;
+        bottom: 0px;
+        left: 0;
+        width: 85%;
+        padding: 12px;
+        text-align: center;
+        border-radius: 0 0 10px 10px;
+      }
+
+      .login-fb .info .contes .image-profile img {
+        border-radius: 10px 10px 0 0;
+        width: 100%;
+      }
+
+      .login-fb .info .contes .image-profile .close {
+        position: absolute;
+        top: 7px;
+        left: 7px;
+        color: white;
+        background: grey;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .login-fb .info .contes .image-profile:hover .close {
+        color: grey;
+        background-color: white;
+        transform: scale(1.2);
+      }
+
+      .login-fb .info .contes .image-creer {
+        width: 161px;
+        height: 248px;
+        background: #f5f6f7;
+        border: 1px solid #9e9e9e3b;
+        margin-left: 50px;
+        border-radius: 10px;
+        position: relative;
+      }
+
+      .login-fb .info .contes .image-creer::after {
+        content: "Thêm tài khoản";
+        position: absolute;
+        left: 0;
+        bottom: 0px;
+        width: 100%;
+        background-color: white;
+        padding: 12px 30px;
+        box-sizing: border-box;
+        border-radius: 0 0 10px 10px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        color: #1976f2;
+        text-align: center;
+        font-size: 19px;
+      }
+
+      .login-fb .info .contes .image-creer .plus {
+        position: absolute;
+        top: 28%;
+        left: 36%;
+        background-color: #1976f2;
+        font-size: xx-large;
+        color: white;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /******************* form ****************/
+
+      form {
+        background: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center;*/
+        width: 377px;
+        height: fit-content;
+        position: relative;
+        top: 114px;
+        right: -122px;
+        border-radius: 14px;
+        padding: 10px;
+      }
+
+      form input {
+        width: 86%;
+        padding: 16px;
+        border-radius: 6px;
+        outline: none;
+        border: 1px solid #ccc;
+        margin-top: 13px;
+      }
+
+      form input::placeholder {
+        font-size: 17px;
+        color: rgb(167, 167, 167);
+        font-weight: 300;
+      }
+
+      form input:focus:not(form input[type="submit"]) {
+        border: 1px solid #1473ef;
+        box-shadow: 0px 0px 2px #1473ef;
+      }
+
+      .valid input[type="text"],
+      .valid input[type="text"]:focus {
+        border: 1px solid #17ce17;
+      }
+
+      form input[type="text"] + .text {
+        display: none;
+        font-size: 17px;
+        width: 93%;
+        height: 27px;
+        margin-bottom: 0;
+      }
+
+      .error input[type="text"] + .text {
+        color: red;
+        display: block;
+      }
+
+      .valid input[type="text"] + .text {
+        color: #17ce17;
+        display: block;
+      }
+
+      form input[type="password"] {
+      }
+
+      form input[type="submit"] {
+        background: #1473ef;
+        width: 95%;
+        color: white;
+        font-size: 23px;
+        font-weight: bold;
+        height: 51px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      form input[type="submit"]:hover {
+        background-color: #116ee8;
+        cursor: pointer;
+      }
+
+      form a {
+        margin-top: 20px;
+        text-decoration: none;
+        color: #1b4cfd;
+      }
+
+      form a:hover {
+        text-decoration: underline;
+      }
+
+      form .new {
+        margin-top: 18px;
+        padding-top: 7px;
+        border-top: 1px solid #ccc;
+        width: 100%;
+      }
+
+      form .new p {
+        background: #42b72a;
+        color: white;
+        padding: 17px 20px;
+        border-radius: 7px;
+        width: fit-content;
+        margin: 14px auto;
+      }
+
+      form .new p:hover {
+        background-color: #35a51e;
+        cursor: pointer;
+      }
+
+      /* Đã bỏ qua để rút gọn mã nguồn */
+
+      /* Sửa đổi phần tử .login-fb để sử dụng flexbox */
+      .login-fb {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      /* Sửa đổi phần tử .info để sử dụng flexbox */
+      .login-fb .info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 80%;
+        margin: 0;
+      }
+
+      /* Sửa đổi phần tử form để đặt bên phải */
+      form {
+        right: 0;
+        left: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-fb">
+      <div class="info">
+        <!-- Phần logo và hình ảnh hồ sơ -->
+        <div>
+          <div class="image">
+            <img src="images/social.png" alt="Facebook Logo" />
+          </div>
+          <h2>SocialBook</h2>
+          <p>
+            SocialBook giúp bạn kết nối và chia sẻ với mọi người trong cuộc sống
+            của bạn.
+          </p>
+          <div class="contes">
+            <div class="image-profile">
+              <div class="close">x</div>
+              <img src="images/user150.png " alt="Profile Image" />
+            </div>
+            <div class="image-creer">
+              <div class="plus">+</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form đăng nhập -->
+        <form id="loginForm">
+          <input
+            class="email"
+            type="text"
+            placeholder="Email or phone number"
+            required
+          />
+          <p class="text"></p>
+          <input
+            class="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <input class="subm" type="submit" value="Log in" />
+          <a href="" class="forgot">Forgotten password?</a>
+          <div class="new">
+            <p>Create new account</p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // Danh sách tên đăng nhập và mật khẩu hợp lệ
+      const validUsers = [
+        { username: "user1", password: "password1" },
+        { username: "user2", password: "password2" },
+        // Thêm các tên đăng nhập và mật khẩu khác tại đây
+      ];
+
+      // Lấy phần tử form
+      const loginForm = document.getElementById("loginForm");
+
+      // Xử lý sự kiện submit form
+      loginForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // Ngăn chặn gửi dữ liệu form
+
+        // Lấy giá trị từ trường nhập
+        const username = document.querySelector(".email").value;
+        const password = document.querySelector(".password").value;
+
+        // Kiểm tra tên đăng nhập và mật khẩu
+        const validUser = validUsers.find(
+          (user) => user.username === username && user.password === password
+        );
+
+        if (validUser) {
+          // Nếu tên đăng nhập và mật khẩu hợp lệ, chuyển đến trang khác
+          window.location.href = "index.html";
+        } else {
+          alert("Tên đăng nhập hoặc mật khẩu không đúng.");
+        }
+      });
+    </script>
+  </body>
+</html>
